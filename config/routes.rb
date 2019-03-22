@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :groups,  except: [ :user_groups ] do 
-    get '/users', to: 'users#group_users'
+  resources :groups do 
+    get '/users', to: 'groups#group_users'
   end 
   resources :users do 
     get '/groups', to: 'users#user_groups'
