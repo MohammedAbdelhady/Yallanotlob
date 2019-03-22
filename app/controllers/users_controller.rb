@@ -4,8 +4,11 @@ class UsersController < ApplicationController
   # GET /users/1/groups
   def user_groups
     @user = User.find(params[:user_id])
-    @groups = @user.groups
+  if @groups = @user.groups
     render json: @groups.to_a
+  else
+    render json: @user.errors, status: :unprocessable_entity
+  end
   end
   # GET /users/1
   def show

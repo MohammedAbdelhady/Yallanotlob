@@ -5,9 +5,8 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: mysql2
-  username: Gom3a
-  password: 123456
+  adapter: postgresql
+  encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
@@ -24,4 +23,6 @@ test:
 
 production:
   <<: *default
-  database: MyOtlob
+  database: myapp
+   username: myapp
+  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
