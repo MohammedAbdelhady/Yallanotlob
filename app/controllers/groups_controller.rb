@@ -4,7 +4,7 @@ class GroupsController < ApplicationController
   # GET /groups/:group_id/
   def group_users
     @group = Group.find(params[:group_id])
-    @users = @group.users
+    @users = @group.users.where(owner: "0")
     render json: @users.to_a
   end
 
