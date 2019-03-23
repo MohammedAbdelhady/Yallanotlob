@@ -1,15 +1,26 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /users/1/groups
   def user_groups
     @user = User.find(params[:user_id])
-  if @groups = @user.groups
+    @groups = @user.groups
+  if @groups
     render json: @groups.to_a
   else
-    render json: @user.errors, status: :unprocessable_entity
+    render json: @groups.errors, status: :unprocessable_entity
   end
   end
+
+  def user_friends
+    @user = User.find(params[:user_id])
+    @friends = @user.followers
+  if @friends
+    render json: @friends.to_a
+  else
+    render json: @friends.errors, status: :unprocessable_entity
+  end
+  end
+
   # GET /users/1
   def show
     render json: @user
