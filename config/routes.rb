@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  delete '/friendships', to: 'friendships#unfriend'
+  resources :friendships
+
   resources :groups do 
     get '/users', to: 'groups#group_users'
   end 
