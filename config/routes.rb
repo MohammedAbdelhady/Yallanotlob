@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     get '/friends', to: 'users#user_friends'
     get '/groups', to: 'users#user_groups'
 
-  end 
+  end
+  get '/orders/:id/invited', to: "orders#get_invited_friends"  
       # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

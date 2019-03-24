@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
     
 
     if @order.save
-      friends = invitedFriends.map { |e| User.find (e)  }  
+      friends = invitedFriends.map { |e| User.find (e.id)  }  
       # friends = invitedFriends.each do |id|
           # usr = User.find(id)
         # @order.invited_friends << user
@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
       @order.invited_friends = friends  
     
       # @order.invited_friends
-      render json: { order: @order , friends: @order.invited_friends.to_a} , status: :created #, location: @order
+      render json: { msg: "Successful"} , status: :created #, location: @order
     else
       render json: @order.errors, status: :unprocessable_entity
     end
@@ -51,6 +51,20 @@ class OrdersController < ApplicationController
     @order.destroy
   end
 
+  def get_invited_friends
+
+    @order = Order.find(params[:id])
+    invitedFriends = @order.invited_friends
+    friends = @order.order_friends
+    invited = invitedFriends.map { |e| e.id  }
+    user_status1 = friends.map { |e| {:status=>e.user_status ,:user_id=>e.user_id}  }
+    
+    # final = invitedFriends.map { |e| {:name=>e.name ,:email =>e.email,:status=>user_status1.user_status} } }
+
+
+    render json: {invitedFriends: @order.invited_friends,status: user_status1  }
+    
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     # def set_order
