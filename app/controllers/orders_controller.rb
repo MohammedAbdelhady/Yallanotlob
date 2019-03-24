@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
       @order.invited_friends = friends  
     
       # @order.invited_friends
-      render json: { order: @order , friends: @order.invited_friends.to_a} , status: :created #, location: @order
+      render json: { msg: "Successful"} , status: :created #, location: @order
     else
       render json: @order.errors, status: :unprocessable_entity
     end
@@ -51,6 +51,12 @@ class OrdersController < ApplicationController
     @order.destroy
   end
 
+  def get_invited_friends
+
+    @order = Order.find(params[:id])
+    render json: {invitedFriends: @order.invited_friends.to_a }
+    
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     # def set_order
