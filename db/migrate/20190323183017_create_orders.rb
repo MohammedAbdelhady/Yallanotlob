@@ -3,7 +3,7 @@ class CreateOrders < ActiveRecord::Migration[5.2]
     create_table :orders do |t|
       t.string :order_type
       t.string :restaurant
-      t.string :menu_image
+      t.binary :menu_image, :limit => 16.megabyte
       t.references :user, foreign_key: true
       t.string :order_status ,:default => 'waiting'
       #Ex:- :default =>''

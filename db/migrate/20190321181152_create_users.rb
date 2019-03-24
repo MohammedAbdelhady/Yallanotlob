@@ -4,8 +4,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :email
       t.string :password
-      t.binary :avatar
-
+      t.binary :avatar, :limit => 16.megabyte
       t.timestamps
     end
   end
