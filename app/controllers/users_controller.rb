@@ -4,13 +4,14 @@ class UsersController < ApplicationController
   def user_groups
     @user = User.find(params[:user_id])
     @groups = @user.groups
-  if @groups
-    render json: @groups.to_a
-  else
-    render json: @groups.errors, status: :unprocessable_entity
-  end
+    if @groups
+      render json: @groups.to_a
+    else
+      render json: @groups.errors, status: :unprocessable_entity
+    end
   end
 
+  # GET /users/1/friends
   def user_friends
     @user = User.find(params[:user_id])
     @friends = @user.followers
@@ -21,20 +22,37 @@ class UsersController < ApplicationController
   end
   end
 
-  # GET /users/1
-  def show
-    render json: @user
+  # POST /login
+  def login
+    @user = User.where(email: params[:email]).where(password: params[:password])[0]
+
+    if(@user)
+      render json: {status:"success", user: @user}
+    else
+      render json: {status:"failed", message: "Invalid Email or Password" }
+    end
+
   end
 
   # POST /users
   def create
-    @user = User.new(user_params)
 
-    if @user.save
-      render json: @user, status: :created, location: @user
+    @user = User.where(email: params[:email]).where(password: params[:password])[0]
+
+    if(@user)
+      render json: {status:"failed", message: "Email already exist" }
+      
     else
-      render json: @user.errors, status: :unprocessable_entity
+      @user = User.new(user_params)
+
+      if @user.save
+        render json: {status:"success", user: @user}, status: :created, location: @user
+      else
+        render json: @user.errors, status: :unprocessable_entity
+      end
+
     end
+    
   end
 
   # PATCH/PUT /users/1
