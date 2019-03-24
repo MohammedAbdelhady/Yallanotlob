@@ -54,7 +54,15 @@ class OrdersController < ApplicationController
   def get_invited_friends
 
     @order = Order.find(params[:id])
-    render json: {invitedFriends: @order.invited_friends.to_a }
+    invitedFriends = @order.invited_friends
+    friends = @order.order_friends
+    invited = invitedFriends.map { |e| e.id  }
+    user_status1 = friends.map { |e| {:status=>e.user_status ,:user_id=>e.user_id}  }
+    
+    # final = invitedFriends.map { |e| {:name=>e.name ,:email =>e.email,:status=>user_status1.user_status} } }
+
+
+    render json: {invitedFriends: @order.invited_friends,status: user_status1  }
     
   end
   private
