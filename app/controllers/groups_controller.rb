@@ -17,7 +17,14 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
 
     if @group.save
-      render json: @group, status: :created, location: @group
+      @group_user = GroupUser.new({group_id: @group.id, user_id: params[:user_id], owner: 1})
+
+      if @group_user.save
+        render json: @group, status: :created, location: @group_friend
+      else
+        render json: @group_friend.errors, status: :unprocessable_entity
+      end
+
     else
       render json: @group.errors, status: :unprocessable_entity
     end

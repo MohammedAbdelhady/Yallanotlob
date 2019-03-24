@@ -20,7 +20,7 @@ class FriendshipsController < ApplicationController
 
   # DELETE /friendships
   def unfriend
-    @friendship = Friendship.where(follower_id: params[:follower_id]).where(followee_id: params[:followee_id])[0]
+    @friendship = Friendship.where(follower_id: params[:friend_id]).where(followee_id: params[:user_id])[0]
     if @friendship.destroy
       render json: {"status" => "success"}
     else
