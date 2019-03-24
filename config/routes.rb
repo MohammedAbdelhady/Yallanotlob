@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   delete '/friendships', to: 'friendships#unfriend'
+  delete '/group_users', to: 'group_users#removeFriendFromGroup'
+  
   resources :friendships
+  resources :group_users
 
   resources :groups do 
     get '/users', to: 'groups#group_users'
