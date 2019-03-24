@@ -1,5 +1,4 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show, :update, :destroy]
 
   # GET /groups/:group_id/
   def group_users
@@ -35,7 +34,12 @@ class GroupsController < ApplicationController
 
   # DELETE /groups/1
   def destroy
-    @group.destroy
+    @group = Group.find(params[:id])
+    if @group.destroy
+      render json: {"status" => "success"}
+    else
+      render json: @group.errors, status: :unprocessable_entity
+    end
   end
 
   private
