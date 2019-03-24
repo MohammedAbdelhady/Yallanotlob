@@ -2,12 +2,19 @@ class FriendshipsController < ApplicationController
 
   #POST /friendships
   def create
-    @friendship = Friendship.new(friendship_params)
+    @user = User.where(email: params[:email])[0]
 
-    if @friendship.save
-      render json: @friendship, status: :created, location: @friendship
+    if(@user)
+      @friendship = Friendship.new({follower_id: @user.id,followee_id: params[:user_id]})
+
+      if @friendship.save
+        render json: @friendship, status: :created, location: @friendship
+      else
+        render json: @friendship.errors, status: :unprocessable_entity
+      end
+
     else
-      render json: @friendship.errors, status: :unprocessable_entity
+      render json: {status:"failed", message: "User not found"}
     end
   end
 
@@ -21,10 +28,4 @@ class FriendshipsController < ApplicationController
     end
   end
 
-  private
- 
-    # Only allow a trusted parameter "white list" through.
-    def friendship_params
-      params.require(:friendship).permit(:follower_id, :followee_id)
-    end
 end
