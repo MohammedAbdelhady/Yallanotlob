@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
     
 
     if @order.save
-      friends = invitedFriends.map { |e| User.find (e)  }  
+      friends = invitedFriends.map { |e| User.find (e.id)  }  
       # friends = invitedFriends.each do |id|
           # usr = User.find(id)
         # @order.invited_friends << user
