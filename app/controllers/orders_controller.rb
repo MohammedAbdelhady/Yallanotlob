@@ -1,10 +1,12 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :update, :destroy]
+  #before_action :set_order, only: [:show, :update, :destroy]
 
   # GET /orders
   def index
-    @orders = Order.all
-    render json: @orders
+    @user = User.find(params[:user_id])
+    @orders = @user.orders 
+    @invites = @user.invitations
+    render json: {orders: @orders ,invitedAt: @invites}
   end
 
   # GET /orders/1
@@ -51,12 +53,12 @@ class OrdersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_order
-      @order = Order.find(params[:id])
-    end
+    # def set_order
+    #   @order = Order.find(params[:id])
+    # end
 
     # Only allow a trusted parameter "white list" through.
     def order_params
-      params.permit(:order_type, :restaurant, :menu_image)
+      params.require(:order).permit(:order_type, :restaurant, :menu_image)
     end
 end

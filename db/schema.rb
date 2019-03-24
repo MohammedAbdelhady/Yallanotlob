@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-# ActiveRecord::Schema.define(version: 2019_03_23_222536) do
-ActiveRecord::Schema.define(version: 2019_03_23_190758) do
+ActiveRecord::Schema.define(version: 2019_03_23_222536) do
 
   create_table "friendships", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "follower_id"
