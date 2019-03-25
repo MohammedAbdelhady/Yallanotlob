@@ -21,5 +21,6 @@ Rails.application.routes.draw do
 
   end
   get '/orders/:id/invited', to: "orders#get_invited_friends"  
+  put 'users/:user_id/orders/:id/join', to: "orders#join_order"
       # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
