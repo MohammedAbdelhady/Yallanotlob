@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :update, :destroy]
+  before_action :set_order , only: [:show, :update, :destroy]
 
   # GET /orders
   def index
@@ -9,11 +9,6 @@ class OrdersController < ApplicationController
     render json: {orders: @orders ,invitedAt: @invites}
   end
 
-  # GET /orders/1
-  def show
-    render json: @order
-  end
-
   # POST /orders
   def create
 
@@ -21,63 +16,69 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.user = User.find(params[:user_id])
     
-
     if @order.save
       friends = invitedFriends.map { |e| User.find (e[:id])  }  
-     
       @order.invited_friends = friends  
-     
-      render json: { msg: "Successful"} , status: :created #, location: @order
+      render json: { msg: "Successful"} # , status: :created #, location: @order
+    
     else
       render json: @order.errors, status: :unprocessable_entity
     end
   end
-
-  # PATCH/PUT /orders/1
-  def update
-    if @order.update(order_params)
-      render json: @order
-    else
-      render json: @order.errors, status: :unprocessable_entity
-    end
-  end
-
   # DELETE /orders/1
   def destroy
-    @order.destroy
+    # @order = Order.find(params[:id])
+    if @order.destroy
+      render json: {msg: "Order Deleted Successfuly"}
+    end
   end
 
   def get_invited_friends
 
     @order = Order.find(params[:id])
-   
-    # user_status1 = friends.map { |e| {:status=>e.user_status ,:user_id=>e.user_id}  }
-    
-
     invited = User.select('users.*,order_friends.user_status').
-    joins(:order_friends).where('order_id =? and user_status = "invited"',@order.id)
+    joins(:order_friends).where('order_id =? ',@order.id)
     
     joined = User.select('users.*,order_friends.user_status').
     joins(:order_friends).where('order_id =? and user_status = "joined"',@order.id)
 
-    render json: {invited: invited  ,joined: joined}
-    
+    render json: { allInvitated: invited  , accepted: joined}
   end
 
   def join_order
     @order = Order.find(params[:id])
     @user = User.find(params[:user_id])
 
-    order = OrderFriend.where('order_id =? and user_id = ?',params[:id],params[:user_id]).first
-    # render json: { msg: order}
+    order = OrderFriend.where('order_id = ? and user_id = ?',params[:id],params[:user_id]).first
+
     if order.update_attributes(:user_status => "joined")
       render json: { msg: "Updated"} , status: :created #, location: @order
     else
       render json: order.errors, status: :unprocessable_entity
     end
   end
-  
+
+  def finish_order
+    @order = Order.find(params[:id])
+
+    if @order.update_attributes(:order_status => "finished")
+      render json: { msg: "Order Has Finished"} , status: :created #, location: @order
+    else
+      render json: @order.errors, status: :unprocessable_entity
+    end
+
+  end
+  def remove_invitation
+
+    friend_invited = OrderFriend.where('order_id =? and user_id = ?',params[:order_id],params[:user_id]).first
+
+    if friend_invited.destroy
+      render json: { msg: "Removed from order invitations"}
+    end
+
+  end
   private
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_order
       @order = Order.find(params[:id])

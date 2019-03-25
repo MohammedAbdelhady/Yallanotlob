@@ -12,8 +12,8 @@ default: &default
 
 development:
   adapter: mysql2
-  username: Gom3a
-  password: 123456
+  username: kholif
+  password: 11235
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
   database: MyOtlob

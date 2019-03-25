@@ -1,0 +1,612 @@
+{
+	"info": {
+		"_postman_id": "2204bb83-4b9a-4f3a-a8b7-8ae56501426e",
+		"name": "Yalla Notlob Orders APIs",
+		"description": "# Introduction\nWhat does your API do?\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/users/:user_id/orders/:order_id/order_items",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "/users/:user_id/orders/:order_id/order_items",
+					"path": [
+						"users",
+						":user_id",
+						"orders",
+						":order_id",
+						"order_items"
+					],
+					"variable": [
+						{
+							"key": "user_id"
+						},
+						{
+							"key": "order_id"
+						}
+					]
+				},
+				"description": "{\n\t\"item\":\"falafel\",\n\t\"price\":4,\n\t\"amount\":5 ,\n\t\"comment\":\"no comment\"\n}"
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "/users/:user_id/orders/:order_id/order_items",
+							"path": [
+								"users",
+								":user_id",
+								"orders",
+								":order_id",
+								"order_items"
+							],
+							"variable": [
+								{
+									"key": "user_id"
+								},
+								{
+									"key": "order_id"
+								}
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": " /users/:user_id/orders",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "/users/:user_id/orders",
+					"path": [
+						"users",
+						":user_id",
+						"orders"
+					],
+					"variable": [
+						{
+							"key": "user_id"
+						}
+					]
+				},
+				"description": "{\n \n  \"order_type\":\"breakFast\",\n  \"restaurant\":\"kholaiff\",\n  \"invited\":[{\"id\":3},{\"id\":4},{\"id\":5}],\n  \"menu_image\":pulp\n}"
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "/users/:user_id/orders",
+							"path": [
+								"users",
+								":user_id",
+								"orders"
+							],
+							"variable": [
+								{
+									"key": "user_id"
+								}
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "/users/:user_id/orders",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "/orders/:id/invited",
+					"path": [
+						"orders",
+						":id",
+						"invited"
+					],
+					"variable": [
+						{
+							"key": "id"
+						}
+					]
+				},
+				"description": "{\n    \"orders\": [\n        {\n            \"id\": 10,\n            \"order_type\": \"breakFast\",\n            \"restaurant\": \"kholaiff\",\n            \"menu_image\": \"fffffff\",\n            \"user_id\": 1,\n            \"order_status\": \"waiting\",\n            \"created_at\": \"2019-03-25T10:45:14.000Z\",\n            \"updated_at\": \"2019-03-25T10:45:14.000Z\"\n        },\n        {\n            \"id\": 11,\n            \"order_type\": \"breakFast\",\n            \"restaurant\": \"kholaiff\",\n            \"menu_image\": \"fffffff\",\n            \"user_id\": 1,\n            \"order_status\": \"waiting\",\n            \"created_at\": \"2019-03-25T18:04:21.000Z\",\n            \"updated_at\": \"2019-03-25T18:04:21.000Z\"\n        },\n        {\n            \"id\": 12,\n            \"order_type\": \"Breakfast\",\n            \"restaurant\": \"ddddd\",\n            \"menu_image\": \"\",\n            \"user_id\": 1,\n            \"order_status\": \"waiting\",\n            \"created_at\": \"2019-03-25T18:25:24.000Z\",\n            \"updated_at\": \"2019-03-25T18:25:24.000Z\"\n        }\n    ],\n    \"invitedAt\": [\n        {\n            \"id\": 2,\n            \"order_type\": \"launch\",\n            \"restaurant\": \"kjkjkj\",\n            \"menu_image\": \"kkkkk\",\n            \"user_id\": 3,\n            \"order_status\": null,\n            \"created_at\": \"2019-03-23T20:46:59.000Z\",\n            \"updated_at\": \"2019-03-24T13:56:39.000Z\"\n        }\n    ]\n}"
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "/orders/:id/invited",
+							"path": [
+								"orders",
+								":id",
+								"invited"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "/orders/:id/invited",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "/orders/:id/invited",
+					"path": [
+						"orders",
+						":id",
+						"invited"
+					],
+					"variable": [
+						{
+							"key": "id"
+						}
+					]
+				},
+				"description": "{\n    \"allInvitated\": [\n        {\n            \"id\": 1,\n            \"name\": \"fffffffff\",\n            \"email\": \"dlkdlkdlkd\",\n            \"password\": \"ggggg\",\n            \"avatar\": \"true\",\n            \"created_at\": \"2019-03-23T20:16:36.000Z\",\n            \"updated_at\": \"2019-03-23T20:16:36.000Z\",\n            \"user_status\": \"invited\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"aaaaaaaf\",\n            \"email\": \"ahmaaaaaed@ysh\",\n            \"password\": \"ffaaaafff\",\n            \"avatar\": \"true\",\n            \"created_at\": \"2019-03-23T21:33:41.000Z\",\n            \"updated_at\": \"2019-03-23T21:33:41.000Z\",\n            \"user_status\": \"invited\"\n        }\n    ],\n    \"accepted\": []\n}"
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "/orders/:id/invited",
+							"path": [
+								"orders",
+								":id",
+								"invited"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "/orders/:id/order_items",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "/orders/:id/order_items",
+					"path": [
+						"orders",
+						":id",
+						"order_items"
+					],
+					"variable": [
+						{
+							"key": "id"
+						}
+					]
+				},
+				"description": "{\n    \"order\": {\n        \"id\": 2,\n        \"order_type\": \"launch\",\n        \"restaurant\": \"kjkjkj\",\n        \"menu_image\": \"kkkkk\",\n        \"user_id\": 3,\n        \"order_status\": null,\n        \"created_at\": \"2019-03-23T20:46:59.000Z\",\n        \"updated_at\": \"2019-03-24T13:56:39.000Z\"\n    },\n    \"order_details\": [\n        {\n            \"id\": 1,\n            \"order_id\": 2,\n            \"user_id\": 3,\n            \"item\": \"ta3mia\",\n            \"amount\": 11,\n            \"price\": 33,\n            \"comment\": null,\n            \"created_at\": \"2019-03-23T21:40:39.000Z\",\n            \"updated_at\": \"2019-03-23T21:40:39.000Z\",\n            \"userName\": \"aaaaaaaf\",\n            \"email\": \"ahmaaaaaed@ysh\"\n        }\n    ]\n}"
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "/orders/:id/order_items",
+							"path": [
+								"orders",
+								":id",
+								"order_items"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "/orders/:id/finished",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "/orders/:id/finished",
+					"path": [
+						"orders",
+						":id",
+						"finished"
+					],
+					"variable": [
+						{
+							"key": "id"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "/orders/:id/finished",
+							"path": [
+								"orders",
+								":id",
+								"finished"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": " /users/:user_id/orders/:id/join",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "/users/:user_id/orders/:id/join",
+					"path": [
+						"users",
+						":user_id",
+						"orders",
+						":id",
+						"join"
+					],
+					"variable": [
+						{
+							"key": "user_id"
+						},
+						{
+							"key": "id"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "/users/:user_id/orders/:id/join",
+							"path": [
+								"users",
+								":user_id",
+								"orders",
+								":id",
+								"join"
+							],
+							"variable": [
+								{
+									"key": "user_id"
+								},
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "orders/:id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "orders/:id",
+					"host": [
+						"orders"
+					],
+					"path": [
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "orders/:id",
+							"host": [
+								"orders"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "/orders/:order_id/order_items/:id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "/orders/:order_id/order_items/:id",
+					"path": [
+						"orders",
+						":order_id",
+						"order_items",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "order_id"
+						},
+						{
+							"key": "id"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "/orders/:order_id/order_items/:id",
+							"path": [
+								"orders",
+								":order_id",
+								"order_items",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "order_id"
+								},
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "/orders/:order_id/remove/:user_id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "/orders/:order_id/remove/:user_id",
+					"path": [
+						"orders",
+						":order_id",
+						"remove",
+						":user_id"
+					],
+					"variable": [
+						{
+							"key": "order_id"
+						},
+						{
+							"key": "user_id"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "/orders/:order_id/remove/:user_id",
+							"path": [
+								"orders",
+								":order_id",
+								"remove",
+								":user_id"
+							],
+							"variable": [
+								{
+									"key": "order_id"
+								},
+								{
+									"key": "user_id"
+								}
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		}
+	]
+}
