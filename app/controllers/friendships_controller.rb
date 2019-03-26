@@ -1,5 +1,5 @@
 class FriendshipsController < ApplicationController
-
+  before_action :authorize_request
   #POST /friendships
   def create
     @user = User.where(email: params[:email])[0]

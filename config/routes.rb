@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+  post '/auth/login', to: 'authentication#login'
+  
   delete '/friendships', to: 'friendships#unfriend'
   delete '/group_users', to: 'group_users#removeFriendFromGroup'
-  post '/login', to: 'users#login'
   
   resources :friendships
   resources :group_users

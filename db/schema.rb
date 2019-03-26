@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_25_214041) do
+ActiveRecord::Schema.define(version: 2019_03_23_222536) do
 
   create_table "friendships", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "follower_id"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2019_03_25_214041) do
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "order_type"
     t.string "restaurant"
-    t.binary "menu_image"
+    t.binary "menu_image", limit: 4294967295
     t.bigint "user_id"
     t.string "order_status", default: "waiting"
     t.datetime "created_at", null: false
@@ -73,8 +73,8 @@ ActiveRecord::Schema.define(version: 2019_03_25_214041) do
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.string "password"
-    t.binary "avatar"
+    t.string "password_digest"
+    t.binary "avatar", limit: 4294967295
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

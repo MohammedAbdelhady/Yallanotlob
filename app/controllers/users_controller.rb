@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-
+  before_action :authorize_request, except: :create
+  
   # GET /users/1/groups
   def user_groups
     @user = User.find(params[:user_id])
@@ -37,21 +38,14 @@ class UsersController < ApplicationController
   # POST /users
   def create
 
-    @user = User.where(email: params[:email]).where(password: params[:password])[0]
-
-    if(@user)
-      render json: {status:"failed", message: "Email already exist" }
-      
-    else
       @user = User.new(user_params)
-
+      @user.password = params[:password]
+      @user.password_confirmation = params[:password_confirmation]
       if @user.save
         render json: {status:"success", user: @user}, status: :created, location: @user
       else
         render json: @user.errors, status: :unprocessable_entity
       end
-
-    end
     
   end
 
@@ -73,6 +67,6 @@ class UsersController < ApplicationController
  
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :avatar)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 end
