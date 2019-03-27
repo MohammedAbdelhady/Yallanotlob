@@ -30,5 +30,9 @@ Rails.application.routes.draw do
   delete '/orders/:order_id/order_items/:id', to: "order_items#destroy"
   delete '/orders/:order_id/remove/:user_id', to: "orders#remove_invitation"
 
+  # notification routes 
+  get '/users/:id/notifications' , to: 'notifications#get_new'
+  get '/users/:id/allnotifications', to: 'notifications#get_all' 
+  get '/users/:id/markasread' , to: 'notifications#mark_as_read'
       # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
