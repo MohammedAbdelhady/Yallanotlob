@@ -1,5 +1,5 @@
 class NotificationsController < ApplicationController
-
+    before_action :authorize_request
     def get_new
     
     #    new_not = Notification.where('notifications.recipient_id =? and notifications.read is NULL',params[:id])
