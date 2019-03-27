@@ -44,7 +44,7 @@ class UsersController < ApplicationController
       if @user.save
         render json: {status:"success", user: @user}, status: :created, location: @user
       else
-        render json: @user.errors, status: :unprocessable_entity
+        render json: {status:"faild", error: @user.errors}, status: :unprocessable_entity
       end
     
   end
