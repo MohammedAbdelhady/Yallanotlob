@@ -1,5 +1,5 @@
 class OrderItemsController < ApplicationController
-
+    before_action :authorize_request
     def create
         @order_item = OrderItem.new(order_item_params)
 

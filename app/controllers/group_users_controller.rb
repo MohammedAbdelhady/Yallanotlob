@@ -1,5 +1,5 @@
 class GroupUsersController < ApplicationController
-  
+  before_action :authorize_request
   #POST /group_users
   def create
 

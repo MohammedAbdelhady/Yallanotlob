@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-
+  before_action :authorize_request
   # GET /groups/:group_id/
   def group_users
     @group = Group.find(params[:group_id])
@@ -14,7 +14,7 @@ class GroupsController < ApplicationController
 
   # POST /groups
   def create
-    @group = Group.new(group_params)
+    @group = Group.new(name: params[:name])
 
     if @group.save
       @group_user = GroupUser.new({group_id: @group.id, user_id: params[:user_id], owner: 1})
