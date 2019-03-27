@@ -4,8 +4,8 @@ class OrdersController < ApplicationController
   # GET /orders
   def index
     @user = User.find(params[:user_id])
-    @orders = @user.orders 
-    @invites = @user.invitations
+    @orders = @user.orders.order('created_at DESC') 
+    @invites = @user.invitations.order('created_at DESC')
     render json: {orders: @orders ,invitedAt: @invites}
   end
 
@@ -19,7 +19,12 @@ class OrdersController < ApplicationController
     if @order.save
       friends = invitedFriends.map { |e| User.find (e[:id])  }  
       @order.invited_friends = friends  
-      render json: { msg: "Successful"} # , status: :created #, location: @order
+      # create invite notification for invited users 
+      friends.each do |friend|
+       Notification.create(recipient: friend,actor: @order.user,action: "invite", notifiable: @order)
+      end
+      
+      render json: { msg: "Successful & notific. sent "} # , status: :created #, location: @order
     
     else
       render json: @order.errors, status: :unprocessable_entity
@@ -52,6 +57,7 @@ class OrdersController < ApplicationController
     order = OrderFriend.where('order_id = ? and user_id = ?',params[:id],params[:user_id]).first
 
     if order.update_attributes(:user_status => "joined")
+      Notification.create(recipient: @order.user,actor: @user,action: "joined", notifiable: order)
       render json: { msg: "Updated"} , status: :created #, location: @order
     else
       render json: order.errors, status: :unprocessable_entity

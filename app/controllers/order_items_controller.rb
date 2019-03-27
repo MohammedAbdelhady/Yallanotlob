@@ -24,7 +24,7 @@ class OrderItemsController < ApplicationController
         @order = Order.find(params[:id])
 
         order_details = OrderItem.select('users.name as userName,users.email,order_items.*').
-        joins(:user).where('order_id =? ',@order.id)
+        joins(:user).where('order_id =? ',@order.id).order('order_items.created_at DESC')
         
         render json: {order: @order ,order_details: order_details}
     end

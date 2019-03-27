@@ -1,0 +1,12 @@
+.hidden{
+    visibility: hidden;
+}
+.notification {
+    width: 30%;
+    height:40%;
+    background-color: #666;
+    color:#fff;
+    text-align: center;
+    border: 1px solid #333;
+    border-radius: 20px;
+}
