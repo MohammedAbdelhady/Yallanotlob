@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /users/1/groups
   def user_groups
     @user = User.find(params[:user_id])
-    @groups = @user.groups
+    @groups = @user.groups.merge(GroupUser.is_owner)
     if @groups
       render json: @groups.to_a
     else
