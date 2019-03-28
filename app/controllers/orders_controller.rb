@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
     @user = User.find(params[:user_id])
     @orders = @user.orders.order('created_at DESC')
     
-    @orders.each do |order|
+    @orders.to_a.each do |order|
       joins = User.select('users.*,order_friends.user_status').
       joins(:order_friends).where('order_id =? and order_friends.user_status = ?',order.id, "joined")
       order.joined = joins.length;
