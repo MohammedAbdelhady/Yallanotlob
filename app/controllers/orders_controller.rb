@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
     @user = User.find(params[:user_id])
     @orders = @user.orders.order('created_at DESC')
     
-    orderss = @orders.to_a.map! {|order|
+    orderss = @orders.to_a.map {|order|
       order.singleton_class.module_eval { attr_accessor :joined }
       order.singleton_class.module_eval { attr_accessor :invited }
 
@@ -18,6 +18,8 @@ class OrdersController < ApplicationController
       invites = User.select('users.*,order_friends.user_status').
       joins(:order_friends).where('order_id =? and order_friends.user_status = ?',order.id, "invited")
       order.invited = invites.length;
+
+      return order;
   }
 
     @invites = @user.invitations.order('created_at DESC')
