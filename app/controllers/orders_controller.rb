@@ -126,7 +126,7 @@ class OrdersController < ApplicationController
 
   def get_order
     @order = Order.find(params[:id])
-    if @orders
+    if @order
      render json: @order, status: :ok
     else
       render json: @order.errors, status: :unprocessable_entity
