@@ -3,7 +3,7 @@ class OrderItemsController < ApplicationController
     def create
         @order_item = OrderItem.new(order_item_params)
 
-        @order_item.order = Order.find(params[:user_id])
+        @order_item.order = Order.find(params[:order_id])
         @order_item.user = User.find(params[:user_id])
         
         if @order_item.save
