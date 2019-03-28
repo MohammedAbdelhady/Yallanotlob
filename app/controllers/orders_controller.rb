@@ -7,15 +7,15 @@ class OrdersController < ApplicationController
     @user = User.find(params[:user_id])
     @orders = @user.orders.order('created_at DESC')
     
-    @orders.to_a.each do |order|
+    @orders.to_a.map! {|order|
       joins = User.select('users.*,order_friends.user_status').
       joins(:order_friends).where('order_id =? and order_friends.user_status = ?',order.id, "joined")
       order.joined = joins.length;
-
+  
       invites = User.select('users.*,order_friends.user_status').
       joins(:order_friends).where('order_id =? and order_friends.user_status = ?',order.id, "invited")
       order.invited = invites.length;
-    end
+  }
 
     @invites = @user.invitations.order('created_at DESC')
 
