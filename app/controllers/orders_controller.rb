@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
 
     
 
-    render json: {orders: orderss ,invitedAt: @invites}
+    render json: {orders: @orders ,invitedAt: @invites}
   end
 
   # POST /orders
