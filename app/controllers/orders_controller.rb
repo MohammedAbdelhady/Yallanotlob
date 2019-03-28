@@ -46,7 +46,7 @@ class OrdersController < ApplicationController
     joins(:order_friends).where('order_id =? ',@order.id)
     
     joined = User.select('users.*,order_friends.user_status').
-    joins(:order_friends).where('order_id =? and order_friends.user_status = "joined"',@order.id)
+    joins(:order_friends).where('order_id =? and order_friends.user_status = ?',@order.id, "joined")
 
     render json: { allInvitated: invited  , accepted: joined}
   end
