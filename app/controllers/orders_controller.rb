@@ -8,11 +8,13 @@ class OrdersController < ApplicationController
     @orders = @user.orders.order('created_at DESC')
     
     @orders.each do |order|
-      order.joined = User.select('users.*,order_friends.user_status').
-      joins(:order_friends).where('order_id =? and order_friends.user_status = ?',order.id, "joined").count
-     
-      order.invited = User.select('users.*,order_friends.user_status').
-      joins(:order_friends).where('order_id =? and order_friends.user_status = ?',order.id, "invited").count
+      joins = User.select('users.*,order_friends.user_status').
+      joins(:order_friends).where('order_id =? and order_friends.user_status = ?',order.id, "joined")
+      order.joined = joins.length;
+
+      invites = User.select('users.*,order_friends.user_status').
+      joins(:order_friends).where('order_id =? and order_friends.user_status = ?',order.id, "invited")
+      order.invited = invites.length;
     end
 
     @invites = @user.invitations.order('created_at DESC')
