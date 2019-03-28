@@ -5,8 +5,20 @@ class OrdersController < ApplicationController
   # GET /orders
   def index
     @user = User.find(params[:user_id])
-    @orders = @user.orders.order('created_at DESC') 
+    @orders = @user.orders.order('created_at DESC')
+    
+    @orders..each do |order|
+      order.joined = User.select('users.*,order_friends.user_status').
+      joins(:order_friends).where('order_id =? and order_friends.user_status = ?',order.id, "joined").count
+     
+      order.invited = User.select('users.*,order_friends.user_status').
+      joins(:order_friends).where('order_id =? and order_friends.user_status = ?',order.id, "invited").count
+    end
+
     @invites = @user.invitations.order('created_at DESC')
+
+    
+
     render json: {orders: @orders ,invitedAt: @invites}
   end
 
