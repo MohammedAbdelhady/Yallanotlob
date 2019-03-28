@@ -6,10 +6,12 @@ class PasswordResetController < ApplicationController
       @user = User.find_by(email: params[:email])
       if @user
         @user.generate_password_token!
+        if @user.save
         UserMailer.reset_password(@user).deliver_now
+        render json: :ok
+        end
       end
-  
-      render json: :ok
+
     end
 
     def edit
@@ -19,7 +21,7 @@ class PasswordResetController < ApplicationController
     def update
         @user.update!(password_params)
         @user.clear_password_token!
-        render json: :ok
+        render json: {status: "success", message: 'Password Changed Successfuly' }, status: :ok
     end
     
     
@@ -28,7 +30,6 @@ class PasswordResetController < ApplicationController
     def set_user
         @user = User.find_by(reset_password_token: params[:token])
         if @user&.reset_password_token_expires_at && @user.reset_password_token_expires_at > Time.now
-            render json: {status: "success", message: 'Password Changed Successfuly' }, status: :ok
         else
             render json: { error: 'Not authorized' }, status: :unauthorized
         end
