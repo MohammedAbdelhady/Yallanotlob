@@ -2,6 +2,15 @@ class OrdersController < ApplicationController
   before_action :authorize_request
   before_action :set_order , only: [:show, :update, :destroy]
   
+  # GET /users/1/allorders
+  def allorders
+    @user = User.find(params[:user_id])
+    @orders = @user.orders.order('created_at DESC') 
+    @invites = @user.invitations.order('created_at DESC')
+    render json: {orders: @orders ,invitedAt: @invites}
+
+  end
+
   # GET /orders
   def index
     @user = User.find(params[:user_id])

@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
     get '/friends', to: 'users#user_friends'
     get '/groups', to: 'users#user_groups'
+    get '/allorders', to: 'orders#allorders'
 
   end
 
