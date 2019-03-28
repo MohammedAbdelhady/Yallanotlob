@@ -8,6 +8,9 @@ class OrdersController < ApplicationController
     @orders = @user.orders.order('created_at DESC')
     
     @orders.to_a.map! {|order|
+      order.singleton_class.module_eval { attr_accessor :joined }
+      order.singleton_class.module_eval { attr_accessor :invited }
+
       joins = User.select('users.*,order_friends.user_status').
       joins(:order_friends).where('order_id =? and order_friends.user_status = ?',order.id, "joined")
       order.joined = joins.length;
