@@ -7,7 +7,7 @@ class OrderItemsController < ApplicationController
         @order_item.user = User.find(params[:user_id])
         
         if @order_item.save
-          render json: { msg: "Successful"} , status: :created #, location: @order
+          render json: { @order_item } , status: :created #, location: @order
         else
           render json: @order.errors, status: :unprocessable_entity
         end
