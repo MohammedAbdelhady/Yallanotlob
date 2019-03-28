@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   
   delete '/friendships', to: 'friendships#unfriend'
   delete '/group_users', to: 'group_users#removeFriendFromGroup'
-  
+  get '/order/:id', to: 'orders#get_order'
+
   resources :friendships
   resources :group_users
 

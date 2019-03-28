@@ -123,6 +123,15 @@ class OrdersController < ApplicationController
     end
 
   end
+
+  def get_order
+    @order = Order.find(params[:id])
+    if @orders
+     render json: @order, status: :ok
+    else
+      render json: @order.errors, status: :unprocessable_entity
+    end
+  end
   private
     
     # Use callbacks to share common setup or constraints between actions.
