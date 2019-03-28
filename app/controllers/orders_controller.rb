@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
     @user = User.find(params[:user_id])
     @orders = @user.orders.order('created_at DESC')
     
-    @orders.to_a.map! {|order|
+    orderss = @orders.to_a.map! {|order|
       order.singleton_class.module_eval { attr_accessor :joined }
       order.singleton_class.module_eval { attr_accessor :invited }
 
@@ -24,7 +24,7 @@ class OrdersController < ApplicationController
 
     
 
-    render json: {orders: @orders ,invitedAt: @invites}
+    render json: {orders: orderss ,invitedAt: @invites}
   end
 
   # POST /orders
