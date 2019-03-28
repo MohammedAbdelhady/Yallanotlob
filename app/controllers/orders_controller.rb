@@ -6,26 +6,38 @@ class OrdersController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @orders = @user.orders.order('created_at DESC')
-    
+    joint = [];
+    invite = [];
+    invites_joint = [];
+    invites_invite = [];
+
     @orders.each do |order|
-      order.singleton_class.module_eval { attr_accessor :joined }
-      order.singleton_class.module_eval { attr_accessor :invited }
 
       joins = User.select('users.*,order_friends.user_status').
       joins(:order_friends).where('order_id =? and order_friends.user_status = ?',order.id, "joined")
-      order.joined = joins.length;
+      joint.push(joins.length);
   
       invites = User.select('users.*,order_friends.user_status').
       joins(:order_friends).where('order_id =? and order_friends.user_status = ?',order.id, "invited")
-      order.invited = invites.length;
+      invite.push(invites.length);
 
     end
 
     @invites = @user.invitations.order('created_at DESC')
 
-    
+    @invites.each do |order|
 
-    render json: {orders: @orders ,invitedAt: @invites}
+      joins = User.select('users.*,order_friends.user_status').
+      joins(:order_friends).where('order_id =? and order_friends.user_status = ?',order.id, "joined")
+      invites_joint.push(joins.length);
+  
+      invites = User.select('users.*,order_friends.user_status').
+      joins(:order_friends).where('order_id =? and order_friends.user_status = ?',order.id, "invited")
+      invites_invite.push(invites.length);
+
+    end
+
+    render json: {orders: {orders:@orders, joined: joint,invited: invite} ,invites: {invitedAt: @invites, joined: invites_joint,invited: invites_invite}}
   end
 
   # POST /orders
